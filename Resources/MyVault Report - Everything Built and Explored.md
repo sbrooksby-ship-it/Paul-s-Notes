@@ -189,16 +189,7 @@ Scraper bridge (needs repo commit + 2 secrets + manual run; 20/day free quota) �
 These are real and worth acting on before this vault or that code goes anywhere.
 
 ### 1. Live Gemini API key in plaintext 🔴
-
-`Parts/coaching feedback data transfer gs.md` line 60 contains:
-
-```javascript
-const API_KEY = "AQ.Ab8RN6IEwIz557wmnZ35M5ZPhFC-WcYQPI7nVx8tB28sfzIVtw";
-```
-
-Used at line 296 against `generativelanguage.googleapis.com`. **Verified present, not a placeholder.**
-
-This is on a network share (`\\dc.bon.local`). Revoke it in Google AI Studio, then move it to Apps Script Properties and delete the literal. Your own build log rule says *"No secrets in this note — ever"* — this note broke that rule.
+`Parts/coaching feedback data transfer gs.md` line 60 contains a hardcoded API key. **Revoke it in Google AI Studio, then remove the literal from this file.** This note broke the "No secrets in this note" rule.
 
 ### 2. Ticket App code is corrupted — don't treat it as source
 
