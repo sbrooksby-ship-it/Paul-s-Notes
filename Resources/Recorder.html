@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Brain — Meeting Recorder</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #252525;
+    --text: #e0e0e0;
+    --muted: #888;
+    --accent: #6c5ce7;
+    --accent-hover: #7d6ff0;
+    --green: #00b894;
+    --red: #e17055;
+    --border: #333;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .recording-card {
+    text-align: center;
+    padding: 32px 20px;
+  }
+
+  .status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  .status-dot.idle { background: var(--muted); }
+  .status-dot.recording { background: var(--red); animation: pulse 1.5s infinite; }
+  .status-dot.saved { background: var(--green); }
+  .status-dot.recovering { background: var(--accent); animation: pulse 1.5s infinite; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+
+  .big-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    transition: all 0.2s;
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .big-button:hover { transform: scale(1.05); }
+
+  .big-button.recording {
+    background: var(--red);
+    color: white;
+    animation: glow 1.5s infinite;
+  }
+
+  .big-button.saved {
+    background: var(--green);
+    color: white;
+  }
+
+  .big-button.recovering {
+    background: var(--accent);
+    color: white;
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(225, 112, 85, 0.4); }
+    50% { box-shadow: 0 0 20px 8px rgba(225, 112, 85, 0.2); }
+  }
+
+  .status-text {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .autosave-indicator {
+    font-size: 0.75rem;
+    color: var(--green);
+    min-height: 16px;
+    transition: opacity 0.3s;
+  }
+
+  .autosave-indicator.saving {
+    color: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  label {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.9375rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--accent);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .btn {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:disabled { background: var(--surface2); color: var(--muted); cursor: not-allowed; }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover { background: var(--border); }
+
+  .btn-danger {
+    background: var(--red);
+    color: white;
+  }
+
+  .btn-danger:hover { opacity: 0.9; }
+
+  .file-list {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8125rem;
+  }
+
+  .file-item:last-child { border-bottom: none; }
+
+  .file-name {
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .file-meta {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 2px;
+  }
+
+  .file-actions {
+    display: flex;
+    gap: 4px;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+  }
+
+  .icon-btn:hover { color: var(--text); }
+
+  .icon-btn.send:hover { color: var(--accent); }
+
+  .info-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .info-box strong { color: var(--text); }
+
+  .shortcut-hint {
+    display: inline-block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--muted);
+  }
+
+  .timer {
+    font-size: 2rem;
+    font-weight: 300;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 8px;
+    color: var(--muted);
+  }
+
+  .timer.active {
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  .timer.recovered {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 16px 0;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .toast.show { opacity: 1; }
+
+  .toast.error { background: var(--red); }
+
+  .section-label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+      <path d="M5 10a7 7 0 0 1 14 0v3a7 7 0 0 1-14 0V10Z"/>
+      <path d="M9 14a3 3 0 0 1 3 0v2a3 3 0 0 1-6 0v-2Z"/>
+    </svg>
+    Meeting Recorder
+  </h1>
+  <p class="subtitle">Record voice memos &amp; meetings — auto-saved to keep you safe</p>
+
+  <!-- Recovery Banner (hidden by default) -->
+  <div id="recoveryBanner" style="display: none; margin-bottom: 0;"></div>
+
+  <!-- Recording Card -->
+  <div class="card recording-card" id="recordingCard">
+    <div class="section-label">Record</div>
+
+    <div class="timer" id="timer">00:00</div>
+
+    <button class="big-button" id="recordBtn" onclick="toggleRecording()">
+      <span id="recordIcon">●</span>
+    </button>
+
+    <div class="status-text" id="statusText">
+      <span class="status-dot idle"></span>
+      Ready to record — click to start
+    </div>
+
+    <div class="autosave-indicator" id="autosaveIndicator" style="display: none;"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="micSelectBtn" onclick="toggleMicSelect()">
+        🎤 Mic: <span id="micName">Default</span> ▾
+      </button>
+      <button class="btn btn-secondary" id="systemAudioBtn" onclick="toggleSystemAudio()">
+        🔊 System Audio: <span id="systemAudioState">Off</span> ▾
+      </button>
+    </div>
+
+    <div class="info-box" style="margin-top: 12px; display: none;" id="micInfo">
+      <strong>Microphone:</strong> <span id="micDetail"></span><br>
+      <strong>Sample rate:</strong> <span id="sampleRate"></span><br>
+      <strong>Channels:</strong> <span id="channels"></span>
+    </div>
+
+    <div class="info-box" style="margin-top: 8px; font-size: 0.75rem;">
+      <strong>Auto-save:</strong> Recording is saved to this browser every 30 seconds. If the browser crashes or you close it accidentally, your recording is recovered when you reopen this page.
+    </div>
+  </div>
+
+  <!-- Meeting Info Card (shown after recording stops) -->
+  <div class="card" id="infoCard" style="display: none;">
+    <div class="section-label">Save Recording</div>
+
+    <div class="form-group">
+      <label for="meetingName">Meeting Name / Person</label>
+      <input type="text" id="meetingName" placeholder="e.g. 1-on-1 with Michael" autocomplete="off">
+    </div>
+
+    <div class="form-group">
+      <label for="meetingType">Type</label>
+      <select id="meetingType">
+        <option value="Voice Dump">🎤 Post-Meeting Voice Dump (2 min)</option>
+        <option value="Full Meeting">📹 Full Meeting Recording</option>
+        <option value="In-Person">🤝 In-Person Meeting</option>
+        <option value="Other">📝 Other</option>
+      </select>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="saveRecording()">💾 Save to Downloads</button>
+      <button class="btn btn-secondary" onclick="discardRecording()">Discard</button>
+    </div>
+  </div>
+
+  <!-- File List Card -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+      <span class="section-label" style="margin-bottom: 0;">Recent Recordings</span>
+      <button class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="refreshFileList()">Refresh</button>
+    </div>
+    <div class="file-list" id="fileList">
+      <div style="color: var(--muted); font-size: 0.8125rem; text-align: center; padding: 16px 0;">
+        Recordings save to your browser's download folder.<br>
+        Move them to <strong>your Team-Brain/Recordings/Audio/ folder</strong><br>
+        or drag them directly into chat with <strong>@paul</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Tips -->
+  <div class="info-box" style="margin-top: 16px;">
+    <strong>Quick tips:</strong><br>
+    • <strong>Post-meeting dump:</strong> Record 2 min right after your 1-on-1 → send to Paul<br>
+    • <strong>Full meeting:</strong> Record the whole thing → send the file to Paul for transcription<br>
+    • <strong>In-person:</strong> Place phone or mic in center of table, record the conversation<br>
+    • After saving, drag the file into Hermes chat with <strong>@paul</strong> or tell him "process the latest recording"<br>
+    • Files save to: <span id="savePath"></span><br>
+    • <strong>Keyboard:</strong> Space = start/stop · Enter = save · Esc = discard
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── State ──
+  let mediaRecorder = null;
+  let mediaStream = null;
+  let audioChunks = [];
+  let recordingStartTime = null;
+  let timerInterval = null;
+  let recordedBlob = null;
+  let recordedName = '';
+  let selectedMicId = null;
+  let systemAudioEnabled = false;
+  let currentRecordingId = null;
+
+  // ── Auto-Save State ──
+  let autoSaveTimer = null;
+  const AUTOSAVE_INTERVAL_MS = 30000; // Save every 30 seconds
+  let totalChunksSaved = 0;
+
+  // ── IndexedDB Setup ──
+  const DB_NAME = 'TeamBrainRecorder';
+  const DB_VERSION = 2;
+  let db = null;
+
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        db = request.result;
+        resolve(db);
+      };
+      request.onupgradeneeded = (e) => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('autoSaves')) {
+          const store = d.createObjectStore('autoSaves', { keyPath: 'id' });
+          store.createIndex('savedAt', 'savedAt', { unique: false });
+        }
+      };
+    });
+  }
+
+  async function saveChunksToDB(recordingId, chunks) {
+    if (!db) return;
+    const tx = db.transaction('autoSaves', 'readwrite');
+    const store = tx.objectStore('autoSaves');
+    store.put({
+      id: recordingId,
+      chunks: chunks,
+      savedAt: Date.now(),
+      duration: Date.now() - recordingStartTime
+    });
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  async function getSavedRecording(recordingId) {
+    if (!db) return null;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('autoSaves', 'readonly');
+      const store = tx.objectStore('autoSaves');
+      const request = store.get(recordingId);
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async function listAutoSavedRecordings() {
+    if (!db) return [];
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction('autoSaves', 'readonly');
+      const store = tx.objectStore('autoSaves');
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result || []);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async function deleteAutoSavedRecording(recordingId) {
+    if (!db) return;
+    const tx = db.transaction('autoSaves', 'readwrite');
+    tx.objectStore('autoSaves').delete(recordingId);
+    return new Promise((resolve) => { tx.oncomplete = resolve; });
+  }
+
+  async function clearExpiredAutoSaves() {
+    if (!db) return;
+    try {
+      const all = await listAutoSavedRecordings();
+      const now = Date.now();
+      const EXPIRY_MS = 12 * 60 * 60 * 1000; // Keep for 12 hours
+      for (const rec of all) {
+        if (now - rec.savedAt > EXPIRY_MS) {
+          await deleteAutoSavedRecording(rec.id);
+        }
+      }
+    } catch (e) {
+      console.warn('CleanExpiredAutoSaves failed:', e);
+    }
+  }
+
+  function generateRecordingId() {
+    return 'rec_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  }
+
+  function formatDuration(ms) {
+    const totalSec = Math.max(0, Math.floor(ms / 1000));
+    const mins = String(Math.floor(totalSec / 60)).padStart(2, '0');
+    const secs = String(totalSec % 60).padStart(2, '0');
+    return `${mins}:${secs}`;
+  }
+
+  function formatTimeAgo(ms) {
+    const totalSec = Math.floor(ms / 1000);
+    if (totalSec < 60) return totalSec + 's ago';
+    if (totalSec < 3600) return Math.floor(totalSec / 60) + 'm ago';
+    return Math.floor(totalSec / 3600) + 'h ago';
+  }
+
+  async function triggerAutoSave() {
+    if (!mediaRecorder || !currentRecordingId || audioChunks.length === 0) return;
+    try {
+      await saveChunksToDB(currentRecordingId, [...audioChunks]);
+      totalChunksSaved = audioChunks.length;
+      updateAutoSaveUI();
+    } catch (e) {
+      console.warn('Auto-save failed:', e);
+    }
+  }
+
+  function startAutoSaveTimer() {
+    stopAutoSaveTimer();
+    // Save immediately
+    triggerAutoSave();
+    // Then every 30 seconds
+    autoSaveTimer = setInterval(() => {
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        triggerAutoSave();
+      } else {
+        stopAutoSaveTimer();
+      }
+    }, AUTOSAVE_INTERVAL_MS);
+  }
+
+  function stopAutoSaveTimer() {
+    if (autoSaveTimer) {
+      clearInterval(autoSaveTimer);
+      autoSaveTimer = null;
+    }
+  }
+
+  function updateAutoSaveUI() {
+    const el = document.getElementById('autosaveIndicator');
+    if (!el) return;
+    if (!mediaRecorder || mediaRecorder.state !== 'recording') {
+      el.style.display = 'none';
+      return;
+    }
+    el.style.display = 'block';
+    const timeSince = formatTimeAgo(Date.now() - (mediaRecorder._lastSaveTime || mediaRecorder.startTime || Date.now()));
+    el.textContent = `💾 Auto-saved ${totalChunksSaved} chunks  ·  Last save ${timeSince}`;
+    el.className = 'autosave-indicator';
+  }
+
+  // ── Init ──
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      await openDB();
+      await clearExpiredAutoSaves();
+    } catch (e) {
+      console.warn('IndexedDB not available (private browsing?):', e);
+    }
+    updateSavePathDisplay();
+    refreshFileList();
+    enumerateMicrophones();
+    setupKeyboardShortcuts();
+    checkForRecovery();
+  });
+
+  function updateSavePathDisplay() {
+    const el = document.getElementById('savePath');
+    if (el) el.textContent = 'your browser download folder';
+  }
+
+  // ── Microphone Enumeration ──
+  async function enumerateMicrophones() {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const mics = devices.filter(d => d.kind === 'audioinput');
+
+      if (mics.length === 0) {
+        document.getElementById('micName').textContent = 'No mics found';
+        return;
+      }
+
+      const preferred = mics.find(m => m.label) || mics[0];
+      selectedMicId = preferred.deviceId;
+      document.getElementById('micName').textContent = preferred.label || 'Microphone';
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: { exact: preferred.deviceId } } });
+        const track = stream.getAudioTracks()[0];
+        const settings = track.getSettings();
+        document.getElementById('micDetail').textContent = preferred.label || 'Microphone';
+        document.getElementById('sampleRate').textContent = (settings.sampleRate || '—') + ' Hz';
+        document.getElementById('channels').textContent = settings.channelCount || '—';
+        document.getElementById('micInfo').style.display = 'block';
+        stream.getTracks().forEach(t => t.stop());
+      } catch (e) {
+        document.getElementById('micInfo').style.display = 'none';
+      }
+    } catch (e) {
+      console.warn('Could not enumerate mics:', e);
+      document.getElementById('micName').textContent = 'Unknown mic';
+    }
+  }
+
+  // ── System Audio Toggle ──
+  async function toggleSystemAudio() {
+    if (systemAudioEnabled) {
+      systemAudioEnabled = false;
+      document.getElementById('systemAudioState').textContent = 'Off';
+      document.getElementById('systemAudioBtn').classList.remove('btn-danger');
+      document.getElementById('systemAudioBtn').classList.add('btn-secondary');
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getDisplayMedia({ audio: true });
+      const audioTrack = stream.getAudioTracks()[0];
+      if (audioTrack) {
+        systemAudioEnabled = true;
+        document.getElementById('systemAudioState').textContent = 'On';
+        document.getElementById('systemAudioBtn').classList.remove('btn-secondary');
+        document.getElementById('systemAudioBtn').classList.add('btn-danger');
+        window._systemAudioTrack = audioTrack;
+        showToast('System audio enabled — select a tab/window if prompted');
+      } else {
+        showToast('No audio track found from screen share', true);
+      }
+    } catch (e) {
+      if (e.name === 'NotAllowedError' || e.name === 'NotFoundError') {
+        showToast('System audio requires Chrome/Edge with screen capture. Mic-only recording is still available.', true);
+        systemAudioEnabled = false;
+        document.getElementById('systemAudioState').textContent = 'Off (unavailable)';
+      } else {
+        console.warn('System audio error:', e);
+        showToast('Could not enable system audio', true);
+      }
+    }
+  }
+
+  // ── Mic Select Toggle ──
+  let micPanel = null;
+
+  async function toggleMicSelect() {
+    if (micPanel && micPanel.style.display === 'block') {
+      micPanel.style.display = 'none';
+      return;
+    }
+
+    if (!micPanel) {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const mics = devices.filter(d => d.kind === 'audioinput');
+      micPanel = document.createElement('div');
+      micPanel.id = 'micSelectPanel';
+      micPanel.style.cssText = 'position:absolute; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:4px; z-index:50; max-height:200px; overflow-y:auto;';
+      micPanel.style.display = 'block';
+
+      if (mics.length === 0) {
+        const msg = document.createElement('div');
+        msg.style.cssText = 'color:var(--muted); padding:8px; font-size:0.8125rem;';
+        msg.textContent = 'No microphones found';
+        micPanel.appendChild(msg);
+      } else {
+        mics.forEach(m => {
+          const btn = document.createElement('button');
+          btn.style.cssText = 'display:block; width:100%; text-align:left; background:none; border:none; color:var(--text); padding:8px 12px; cursor:pointer; font-size:0.875rem; border-radius:4px;';
+          btn.textContent = m.label || 'Unlabeled mic';
+          btn.onmouseover = () => btn.style.background = 'var(--surface2)';
+          btn.onmouseout = () => btn.style.background = 'none';
+          btn.onclick = () => {
+            selectedMicId = m.deviceId;
+            document.getElementById('micName').textContent = m.label || 'Microphone';
+            micPanel.style.display = 'none';
+            showToast('Mic selected: ' + (m.label || 'Microphone'));
+          };
+          micPanel.appendChild(btn);
+        });
+      }
+
+      const micBtn = document.getElementById('micSelectBtn');
+      micBtn.parentElement.style.position = 'relative';
+      micBtn.parentElement.appendChild(micPanel);
+    }
+  }
+
+  // ── Recording ──
+  async function toggleRecording() {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      stopRecording();
+    } else {
+      await startRecording();
+    }
+  }
+
+  async function startRecording() {
+    try {
+      const constraints = {
+        audio: selectedMicId ? { deviceId: { exact: selectedMicId } } : true
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+      // Mix in system audio if enabled
+      if (systemAudioEnabled && window._systemAudioTrack) {
+        const destStream = new MediaStream();
+        destStream.addTrack(stream.getAudioTracks()[0]);
+        destStream.addTrack(window._systemAudioTrack.cloneTrack());
+        stream.getTracks().forEach(t => t.stop());
+        mediaStream = destStream;
+      } else {
+        mediaStream = stream;
+      }
+
+      // Determine codec
+      const mimeTypes = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/ogg;codecs=opus',
+        'audio/mp4',
+        'audio/m4a'
+      ];
+
+      let selectedMime = '';
+      for (const mime of mimeTypes) {
+        if (MediaRecorder.isTypeSupported(mime)) {
+          selectedMime = mime;
+          break;
+        }
+      }
+
+      if (!selectedMime) {
+        showToast('No supported audio codec found', true);
+        mediaStream.getTracks().forEach(t => t.stop());
+        return;
+      }
+
+      // Reset state
+      audioChunks = [];
+      totalChunksSaved = 0;
+      currentRecordingId = generateRecordingId();
+
+      mediaRecorder = new MediaRecorder(mediaStream, {
+        mimeType: selectedMime,
+        audioBitsPerSecond: 128000
+      });
+
+      mediaRecorder.startTime = Date.now();
+      mediaRecorder._lastSaveTime = Date.now();
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) {
+          audioChunks.push(e.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(audioChunks, { type: selectedMime });
+        recordedBlob = blob;
+        recordedName = generateFileName();
+
+        // Stop all tracks
+        if (mediaStream) {
+          mediaStream.getTracks().forEach(t => t.stop());
+          mediaStream = null;
+        }
+
+        stopAutoSaveTimer();
+        mediaRecorder = null;
+
+        // Clean up any auto-save data for this recording
+        if (currentRecordingId) {
+          deleteAutoSavedRecording(currentRecordingId).catch(() => {});
+          currentRecordingId = null;
+        }
+
+        showInfoCard();
+      };
+
+      mediaRecorder.onerror = (e) => {
+        console.error('Recording error:', e);
+        showToast('Recording error — try again', true);
+        cleanupRecording();
+      };
+
+      mediaRecorder.start(1000); // dataavailable every second
+      recordingStartTime = Date.now();
+      startTimer();
+      startAutoSaveTimer();
+      updateAutoSaveUI();
+
+      const btn = document.getElementById('recordBtn');
+      btn.classList.add('recording');
+      btn.innerHTML = '<span style="font-size:1.5rem;">■</span>';
+      document.getElementById('recordIcon').textContent = '■';
+      document.getElementById('statusText').innerHTML = '<span class="status-dot recording"></span>Recording... click to stop';
+
+      document.getElementById('micSelectBtn').disabled = true;
+      document.getElementById('systemAudioBtn').disabled = true;
+
+      // Hide recovery banner if it was showing
+      const banner = document.getElementById('recoveryBanner');
+      if (banner) banner.style.display = 'none';
+
+      showToast('Recording started — auto-saving every 30s');
+    } catch (e) {
+      if (e.name === 'NotAllowedError') {
+        showToast('Microphone access denied — allow mic access in your browser', true);
+      } else {
+        showToast('Could not start recording: ' + e.message, true);
+      }
+      console.error(e);
+    }
+  }
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+    }
+    clearInterval(timerInterval);
+    stopAutoSaveTimer();
+    document.getElementById('timer').classList.remove('active', 'recovered');
+    document.getElementById('autosaveIndicator').style.display = 'none';
+
+    const btn = document.getElementById('recordBtn');
+    btn.classList.remove('recording');
+    btn.innerHTML = '<span style="font-size:1.5rem;">↻</span>';
+    document.getElementById('recordIcon').textContent = '↻';
+    document.getElementById('statusText').innerHTML = '<span class="status-dot idle"></span>Recording saved — name it and store it';
+
+    document.getElementById('micSelectBtn').disabled = false;
+    document.getElementById('systemAudioBtn').disabled = false;
+  }
+
+  function cleanupRecording() {
+    stopAutoSaveTimer();
+    if (mediaStream) {
+      mediaStream.getTracks().forEach(t => t.stop());
+      mediaStream = null;
+    }
+    if (window._systemAudioTrack && !systemAudioEnabled) {
+      try { window._systemAudioTrack.stop(); } catch(e) {}
+      window._systemAudioTrack = null;
+    }
+    mediaRecorder = null;
+  }
+
+  function generateFileName() {
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 10);
+    const timeStr = now.toTimeString().slice(0, 5).replace(':', '_');
+    const type = document.getElementById('meetingType').value;
+    const person = document.getElementById('meetingName').value.trim() || 'Unnamed';
+    const safePerson = person.replace(/[^a-zA-Z0-9 _-]/g, '').slice(0, 40);
+
+    let prefix;
+    if (type === 'Voice Dump') prefix = 'VoiceDump';
+    else if (type === 'Full Meeting') prefix = 'Meeting';
+    else if (type === 'In-Person') prefix = 'InPerson';
+    else prefix = 'Recording';
+
+    return `${prefix} - ${dateStr} ${timeStr} - ${safePerson}.webm`;
+  }
+
+  // ── Timer ──
+  function startTimer() {
+    document.getElementById('timer').classList.add('active');
+    document.getElementById('timer').classList.remove('recovered');
+    timerInterval = setInterval(() => {
+      const elapsed = Date.now() - recordingStartTime;
+      document.getElementById('timer').textContent = formatDuration(elapsed);
+    }, 100);
+  }
+
+  // ── Recovery ──
+  async function checkForRecovery() {
+    try {
+      const saved = await listAutoSavedRecordings();
+      if (saved.length > 0) {
+        saved.sort((a, b) => b.savedAt - a.savedAt);
+        const mostRecent = saved[saved.length - 1];
+        const elapsed = Date.now() - mostRecent.savedAt;
+        const chunks = mostRecent.chunks ? mostRecent.chunks.length : 0;
+        const timeAgo = formatTimeAgo(elapsed);
+        const duration = mostRecent.duration ? formatDuration(mostRecent.duration) : '~?';
+
+        const banner = document.getElementById('recoveryBanner');
+        if (banner) {
+          banner.style.display = 'block';
+          banner.innerHTML = `
+            <div style="background: var(--surface2); border: 1px solid var(--accent); border-radius: 8px; padding: 12px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="color: var(--accent); font-size: 1.2rem;">⚠️</span>
+                <strong style="color: var(--accent);">Unfinished recording found</strong>
+              </div>
+              <div style="font-size: 0.8125rem; color: var(--muted); margin-bottom: 10px;">
+                Auto-saved ${chunks} chunks · ~${duration} recorded · Saved ${timeAgo}
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" onclick="recoverRecording('${mostRecent.id}')">📼 Recover &amp; Save It</button>
+                <button class="btn btn-secondary" onclick="discardRecovery('${mostRecent.id}')">Discard</button>
+              </div>
+            </div>
+          `;
+        }
+      }
+    } catch (e) {
+      console.warn('Recovery check failed:', e);
+    }
+  }
+
+  async function recoverRecording(recordingId) {
+    try {
+      const record = await getSavedRecording(recordingId);
+      if (!record || !record.chunks || record.chunks.length === 0) {
+        showToast('No recovery data found', true);
+        const banner = document.getElementById('recoveryBanner');
+        if (banner) banner.style.display = 'none';
+        return;
+      }
+
+      // Rebuild blob
+      const blob = new Blob(record.chunks, { type: 'audio/webm;codecs=opus' });
+      recordedBlob = blob;
+      const timeStr = new Date(record.savedAt).toISOString().slice(0, 19).replace(/[:-]/g, '_');
+      recordedName = `Recovered - ${timeStr}.webm`;
+
+      // Clean up
+      await deleteAutoSavedRecording(recordingId);
+
+      // Hide banner
+      const banner = document.getElementById('recoveryBanner');
+      if (banner) banner.style.display = 'none';
+
+      // Show saved state
+      document.getElementById('timer').textContent = '⚠️ Recovered';
+      document.getElementById('timer').classList.add('recovered');
+      document.getElementById('statusText').innerHTML = '<span class="status-dot recovering"></span>Recording recovered — name it and save';
+      document.getElementById('recordBtn').classList.add('recovering');
+      document.getElementById('recordBtn').innerHTML = '<span style="font-size:1.5rem;">↻</span>';
+      document.getElementById('recordIcon').textContent = '↻';
+      document.getElementById('recordBtn').disabled = true;
+      document.getElementById('micSelectBtn').disabled = true;
+      document.getElementById('systemAudioBtn').disabled = true;
+      document.getElementById('autosaveIndicator').style.display = 'none';
+
+      showInfoCard();
+      showToast('Recording recovered — review and save it');
+    } catch (e) {
+      console.error('Recovery failed:', e);
+      showToast('Recovery failed — try again', true);
+    }
+  }
+
+  async function discardRecovery(recordingId) {
+    if (recordingId) {
+      await deleteAutoSavedRecording(recordingId);
+    }
+    const banner = document.getElementById('recoveryBanner');
+    if (banner) banner.style.display = 'none';
+    showToast('Discarded');
+  }
+
+  // ── UI Flow ──
+  function showInfoCard() {
+    document.getElementById('infoCard').style.display = 'block';
+    document.getElementById('infoCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('meetingName').focus();
+  }
+
+  function saveRecording() {
+    if (!recordedBlob) {
+      showToast('No recording to save', true);
+      return;
+    }
+
+    const nameInput = document.getElementById('meetingName');
+    const typeSelect = document.getElementById('meetingType');
+    const person = nameInput.value.trim() || 'Unnamed';
+    const type = typeSelect.value;
+
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0, 10);
+    const timeStr = now.toTimeString().slice(0, 5).replace(':', '_');
+    const safePerson = person.replace(/[^a-zA-Z0-9 _-]/g, '').slice(0, 40);
+
+    let prefix;
+    if (type === 'Voice Dump') prefix = 'VoiceDump';
+    else if (type === 'Full Meeting') prefix = 'Meeting';
+    else if (type === 'In-Person') prefix = 'InPerson';
+    else prefix = 'Recording';
+
+    const filename = `${prefix} - ${dateStr} ${timeStr} - ${safePerson}.webm`;
+
+    // Trigger download
+    const url = URL.createObjectURL(recordedBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    // Reset UI
+    resetUI();
+    showToast(`Saved: ${filename} — drag into chat with @paul or move to Team-Brain/Recordings/Audio/`);
+  }
+
+  function discardRecording() {
+    recordedBlob = null;
+    recordedName = '';
+    document.getElementById('infoCard').style.display = 'none';
+    resetUI();
+    showToast('Recording discarded');
+  }
+
+  function resetUI() {
+    document.getElementById('recordBtn').classList.remove('saved', 'recovering', 'recording');
+    document.getElementById('recordBtn').innerHTML = '<span style="font-size:2rem;">●</span>';
+    document.getElementById('recordIcon').textContent = '●';
+    document.getElementById('statusText').innerHTML = '<span class="status-dot idle"></span>Ready to record — click to start';
+    document.getElementById('timer').textContent = '00:00';
+    document.getElementById('timer').classList.remove('active', 'recovered');
+    document.getElementById('autosaveIndicator').style.display = 'none';
+    document.getElementById('micSelectBtn').disabled = false;
+    document.getElementById('systemAudioBtn').disabled = false;
+    document.getElementById('meetingName').value = '';
+    audioChunks = [];
+    totalChunksSaved = 0;
+    currentRecordingId = null;
+    recordedBlob = null;
+    recordedName = '';
+  }
+
+  function refreshFileList() {
+    const container = document.getElementById('fileList');
+    container.innerHTML = `
+      <div style="color: var(--muted); font-size: 0.8125rem; text-align: center; padding: 16px 0;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:block; margin:0 auto 8px;">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        Recordings save to your browser's download folder.<br>
+        Move them to <strong>your Team-Brain/Recordings/Audio/ folder</strong><br>
+        or drag them directly into chat with <strong>@paul</strong>.
+      </div>
+    `;
+  }
+
+  // ── Toast ──
+  function showToast(message, isError = false) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'toast show' + (isError ? ' error' : '');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+      toast.className = 'toast';
+    }, 4000);
+  }
+
+  // ── Keyboard Shortcuts ──
+  function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === ' ' || e.key === 'Space') {
+        e.preventDefault();
+        toggleRecording();
+      }
+      if (e.key === 'Enter' && document.getElementById('infoCard').style.display === 'block') {
+        saveRecording();
+      }
+      if (e.key === 'Escape' && document.getElementById('infoCard').style.display === 'block') {
+        discardRecording();
+      }
+    });
+  }
+
+  // ── Cleanup on page unload ──
+  window.addEventListener('beforeunload', () => {
+    // Auto-save one last time before closing
+    if (mediaRecorder && mediaRecorder.state === 'recording' && audioChunks.length > 0 && currentRecordingId) {
+      saveChunksToDB(currentRecordingId, [...audioChunks]).catch(() => {});
+    }
+    stopAutoSaveTimer();
+    cleanupRecording();
+    if (window._systemAudioTrack) {
+      try { window._systemAudioTrack.stop(); } catch(e) {}
+    }
+  });
+</script>
+</body>
+</html>

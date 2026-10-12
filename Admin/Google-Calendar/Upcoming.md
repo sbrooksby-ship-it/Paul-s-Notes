@@ -1,0 +1,16 @@
+# 📅 Next 7 Days — Google Calendar
+
+*Auto-synced from Google Calendar — last updated: 02:00 PM Mountain Daylight Time*
+
+---
+
+## 1. Busy
+
+- **Time:** 04:00 PM – 05:00 PM Mountain Daylight Time
+- **Date:** Saturday, October 10, 2026
+- **Event ID:** `6pc4bb81r1kporp6l06b0dj7qq_20261010T220000Z`
+- **Status:** confirmed
+- **Organizer:** sbrooksby@bonadmin.com
+- **Link:** [Open in Google Calendar](https://www.google.com/calendar/event?eid=NnBjNGJiODFyMWtwb3JwNmwwNmIwZGo3cXFfMjAyNjEwMTBUMjIwMDAwWiBzYnJvb2tzYnlAYm9uYWRtaW4uY29t)
+
+---
