@@ -127,3 +127,16 @@
 - [[Team Profiles/Samuel Ribeiro]] → Commitments (3 outstanding — email action plans to group; share Call Evaluation Guide/rubric with Jared; confirm team leads have OTA access for Health Coach course)
 
 *Want Paul to remind you about overdue items? Ask: "What am I behind on?"*
+
+---
+
+## 🟡 Added Tue 10/13 — Div 2 / 3 / 4 / 6 Cohort Update
+
+- [ ] **Div 4** — Get EVP approval for lock approval (phytolock) — **blocked**; Andy (VP) has no data to back the "why"; highest-leverage open item.
+- [ ] **Andy (VP)** — Provide info/workable justification for the phytolock need.
+- [ ] **Kyler (marketing)** — Identify the process submitted ~2 months ago that's still not done; clarify ownership (his joke = true signal).
+- [ ] **Robert (Div 2 VP)** — Push "getting ads up" pattern to live; roll out hypothesis; send SOPS to Div 4.
+- [ ] **Rykker (Div 6)** — Ship VIP boxes in 1–2 weeks; set up next steps with Div 3 (next Monday).
+- [ ] **Div 2 / Div 6** — Provide retention/conversion updates to Div 3 (next Monday).
+- [ ] **Div 3** — Evaluate larger budget request at the 90-day mark (170 opt-ins, expect ~doubled).
+
