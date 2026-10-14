@@ -21,6 +21,7 @@
 - [ ] **add jev to grade AI for sales call**
 
 - [ ] **Hear back from Sherry — she'll follow up with me** — Sherry said she'll follow up with Seven on cohort metrics. Track this.
+- [ ] **Adjust compliance AI tool to see if agents are leading them** — Review whether the compliance AI tool is properly guiding agents, or if agents are leading/redirecting the AI's responses.
 
 - [ ] **Build checklist examiner bot** — A bot that examines checklists when agents add them, summarizes the outs (what was missed/disapproved), and emails the summary to whoever needs it (Rafa, Jared, Aaron — whoever I need to send it to). Self-managed — I handle all Streamlit + automation work alone.
 
