@@ -21,11 +21,10 @@
 - [ ] **add jev to grade AI for sales call**
 
 - [ ] **Hear back from Sherry — she'll follow up with me** — Sherry said she'll follow up with Seven on cohort metrics. Track this.
-- [ ] **Adjust compliance AI tool to see if agents are leading them** — Review whether the compliance AI tool is properly guiding agents, or if agents are leading/redirecting the AI's responses.
 
 - [ ] **Build checklist examiner bot** — A bot that examines checklists when agents add them, summarizes the outs (what was missed/disapproved), and emails the summary to whoever needs it (Rafa, Jared, Aaron — whoever I need to send it to). Self-managed — I handle all Streamlit + automation work alone.
 
-- [x] **🔴 Ask Brad: can our app be used by other teams/departments? (Samuel's question)** — Oct 7. Samuel raised the question that our app may be usable beyond our own group — Seven needs to **ask Brad when he's back in town next Monday (Oct 12).** Brad was off all week Oct 5–9. **This is a scope/permission question, not a build question** — worth asking before anyone builds on the assumption it's shareable. Samuel's own words: Dept 15 "can help with any training that you need."
+- [ ] **🔴 Ask Brad: can our app be used by other teams/departments? (Samuel's question)** — Oct 7. Samuel raised the question that our app may be usable beyond our own group — Seven needs to **ask Brad when he's back in town next Monday (Oct 12).** Brad was off all week Oct 5–9. **This is a scope/permission question, not a build question** — worth asking before anyone builds on the assumption it's shareable. Samuel's own words: Dept 15 "can help with any training that you need."
 
 - [ ] **Watch whether Care automation waits for Dept 14 mock training** — Sales pilots this week, Care likely next week. Dept 14 planning a mock training with a test, possibly this week. Worth asking whether Care goes live in parallel with the mock or waits for the result.
 
@@ -128,3 +127,16 @@
 - [[Team Profiles/Samuel Ribeiro]] → Commitments (3 outstanding — email action plans to group; share Call Evaluation Guide/rubric with Jared; confirm team leads have OTA access for Health Coach course)
 
 *Want Paul to remind you about overdue items? Ask: "What am I behind on?"*
+
+---
+
+## 🟡 Added Tue 10/13 — Div 2 / 3 / 4 / 6 Cohort Update
+
+- [ ] **Div 4** — Get EVP approval for lock approval (phytolock) — **blocked**; Andy (VP) has no data to back the "why"; highest-leverage open item.
+- [ ] **Andy (VP)** — Provide info/workable justification for the phytolock need.
+- [ ] **Kyler (marketing)** — Identify the process submitted ~2 months ago that's still not done; clarify ownership (his joke = true signal).
+- [ ] **Robert (Div 2 VP)** — Push "getting ads up" pattern to live; roll out hypothesis; send SOPS to Div 4.
+- [ ] **Rykker (Div 6)** — Ship VIP boxes in 1–2 weeks; set up next steps with Div 3 (next Monday).
+- [ ] **Div 2 / Div 6** — Provide retention/conversion updates to Div 3 (next Monday).
+- [ ] **Div 3** — Evaluate larger budget request at the 90-day mark (170 opt-ins, expect ~doubled).
+
