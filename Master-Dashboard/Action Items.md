@@ -33,11 +33,13 @@
 
 ## 🟢 Upcoming (Next Week+)
 
-*tasks for next week and beyond.*
+*- [ ] **Michael side project — checklist automation** — Michael gathers "true sources" for checklist items; AI (JEV/Solar) marks pass/fail. Won't count toward his call eval stats. 2-hr Friday block (10/16, 2-4 PM). Needs: criteria doc, intake process.
+  - [ ] File the "side projects don't count toward stats" agreement in Michael's profile.
+  - [ ] Set up intake process for Michael (vault folder vs. shared doc).
+  - [ ] Finalize "What Makes a Source 'True'" criteria doc.
+  - [ ] Schedule weekly 2-hr block for Michael on Friday.
 
-- [ ] **Figure out re-dividing up checklists between Sophia and Michael** — Right now Sophia has way more checklists than Michael (14 vs. 10). Need to figure out how to redistribute the workload more evenly. Ties into the Brad meeting about grading all calls and the checklist due date distribution issue.
-
-- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
+*- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
   - Key findings & observations (past 3 months)
   - Findings from Call Listen-Ins
   - Findings from Dept. 15 meetings & working with AIM team members
@@ -46,9 +48,9 @@
   - Recommendations from Division 5
   - Overall quality score and any trends
 
-- [ ] **Next Michael check-in** — ~October 5, 2026 (Monday of next week). Recrrent invite still needs to be created.
+*- [ ] **Next Michael check-in** — ~October 5, 2026 (Monday of next week). Recrrent invite still needs to be created.
 
-- [ ] **Next Sophia check-in** — ~October 6, 2026 (Tuesday of next week). Recurring invite still needs to be created.
+*- [ ] **Next Sophia check-in** — ~October 6, 2026 (Tuesday of next week). Recurring invite still needs to be created.
 
 ---
 
