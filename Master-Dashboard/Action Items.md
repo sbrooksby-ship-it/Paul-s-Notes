@@ -37,7 +37,14 @@
 
 - [ ] **Figure out re-dividing up checklists between Sophia and Michael** — Right now Sophia has way more checklists than Michael (14 vs. 10). Need to figure out how to redistribute the workload more evenly. Ties into the Brad meeting about grading all calls and the checklist due date distribution issue.
 
-- [ ] **Talk with Sophia about how checklists being completed have changed** — Brad says the nature of how checklists are getting completed has shifted. Need to discuss with Sophia what's changed, how it's impacting the eval process, and what adjustments are needed. Bring this up at next check-in (~Oct 6) or sooner.
+- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
+  - Key findings & observations (past 3 months)
+  - Findings from Call Listen-Ins
+  - Findings from Dept. 15 meetings & working with AIM team members
+  - What BoN has done to support AIM and improve performance
+  - Trainings held or provided
+  - Recommendations from Division 5
+  - Overall quality score and any trends
 
 - [ ] **Next Michael check-in** — ~October 5, 2026 (Monday of next week). Recrrent invite still needs to be created.
 
