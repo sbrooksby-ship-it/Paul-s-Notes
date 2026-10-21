@@ -39,6 +39,8 @@
   - [ ] Finalize "What Makes a Source 'True'" criteria doc.
   - [ ] Schedule weekly 2-hr block for Michael on Friday.
 
+*- [ ] **Streamlit app deployment** — Switched to Cloudflare deployment instead of self-hosting; switched from Python to more advanced code for the app backend.
+
 *- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
   - Key findings & observations (past 3 months)
   - Findings from Call Listen-Ins
