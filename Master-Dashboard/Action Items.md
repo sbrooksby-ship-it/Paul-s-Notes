@@ -39,7 +39,10 @@
   - [ ] Finalize "What Makes a Source 'True'" criteria doc.
   - [ ] Schedule weekly 2-hr block for Michael on Friday.
 
-*- [ ] **Streamlit app deployment** — Switched to Cloudflare deployment instead of self-hosting; switched from Python to more advanced code for the app backend.
+*- [ ] **JEV AI — parameters & alerts (due Friday 10/30)** — Set up JEV parameters for auditors to remove/flag data from the front end. Create easier visibility for JEV flags. Set up alert for "no customer interaction." Ensure the alert accounts for flagged data removal.
+  - [ ] Auditor data removal parameters for JEV
+  - [ ] Simpler JEV flags visibility
+  - [ ] Alert for "no customer interaction"
 
 *- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
   - Key findings & observations (past 3 months)
