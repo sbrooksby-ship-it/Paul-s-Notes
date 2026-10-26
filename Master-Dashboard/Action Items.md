@@ -21,10 +21,11 @@
 - [ ] **add jev to grade AI for sales call**
 
 - [ ] **Hear back from Sherry — she'll follow up with me** — Sherry said she'll follow up with Seven on cohort metrics. Track this.
+- [ ] **Adjust compliance AI tool to see if agents are leading them** — Review whether the compliance AI tool is properly guiding agents, or if agents are leading/redirecting the AI's responses.
 
 - [ ] **Build checklist examiner bot** — A bot that examines checklists when agents add them, summarizes the outs (what was missed/disapproved), and emails the summary to whoever needs it (Rafa, Jared, Aaron — whoever I need to send it to). Self-managed — I handle all Streamlit + automation work alone.
 
-- [ ] **🔴 Ask Brad: can our app be used by other teams/departments? (Samuel's question)** — Oct 7. Samuel raised the question that our app may be usable beyond our own group — Seven needs to **ask Brad when he's back in town next Monday (Oct 12).** Brad was off all week Oct 5–9. **This is a scope/permission question, not a build question** — worth asking before anyone builds on the assumption it's shareable. Samuel's own words: Dept 15 "can help with any training that you need."
+- [x] **🔴 Ask Brad: can our app be used by other teams/departments? (Samuel's question)** — Oct 7. Samuel raised the question that our app may be usable beyond our own group — Seven needs to **ask Brad when he's back in town next Monday (Oct 12).** Brad was off all week Oct 5–9. **This is a scope/permission question, not a build question** — worth asking before anyone builds on the assumption it's shareable. Samuel's own words: Dept 15 "can help with any training that you need."
 
 - [ ] **Watch whether Care automation waits for Dept 14 mock training** — Sales pilots this week, Care likely next week. Dept 14 planning a mock training with a test, possibly this week. Worth asking whether Care goes live in parallel with the mock or waits for the result.
 
@@ -32,15 +33,29 @@
 
 ## 🟢 Upcoming (Next Week+)
 
-*tasks for next week and beyond.*
+*- [ ] **Michael side project — checklist automation** — Michael gathers "true sources" for checklist items; AI (JEV/Solar) marks pass/fail. Won't count toward his call eval stats. 2-hr Friday block (10/16, 2-4 PM). Needs: criteria doc, intake process.
+  - [ ] File the "side projects don't count toward stats" agreement in Michael's profile.
+  - [ ] Set up intake process for Michael (vault folder vs. shared doc).
+  - [ ] Finalize "What Makes a Source 'True'" criteria doc.
+  - [ ] Schedule weekly 2-hr block for Michael on Friday.
 
-- [ ] **Figure out re-dividing up checklists between Sophia and Michael** — Right now Sophia has way more checklists than Michael (14 vs. 10). Need to figure out how to redistribute the workload more evenly. Ties into the Brad meeting about grading all calls and the checklist due date distribution issue.
+*- [ ] **JEV AI — parameters & alerts (due Friday 10/30)** — Set up JEV parameters for auditors to remove/flag data from the front end. Create easier visibility for JEV flags. Set up alert for "no customer interaction." Ensure the alert accounts for flagged data removal.
+  - [ ] Auditor data removal parameters for JEV
+  - [ ] Simpler JEV flags visibility
+  - [ ] Alert for "no customer interaction"
 
-- [ ] **Talk with Sophia about how checklists being completed have changed** — Brad says the nature of how checklists are getting completed has shifted. Need to discuss with Sophia what's changed, how it's impacting the eval process, and what adjustments are needed. Bring this up at next check-in (~Oct 6) or sooner.
+*- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
+  - Key findings & observations (past 3 months)
+  - Findings from Call Listen-Ins
+  - Findings from Dept. 15 meetings & working with AIM team members
+  - What BoN has done to support AIM and improve performance
+  - Trainings held or provided
+  - Recommendations from Division 5
+  - Overall quality score and any trends
 
-- [ ] **Next Michael check-in** — ~October 5, 2026 (Monday of next week). Recrrent invite still needs to be created.
+*- [ ] **Next Michael check-in** — ~October 5, 2026 (Monday of next week). Recrrent invite still needs to be created.
 
-- [ ] **Next Sophia check-in** — ~October 6, 2026 (Tuesday of next week). Recurring invite still needs to be created.
+*- [ ] **Next Sophia check-in** — ~October 6, 2026 (Tuesday of next week). Recurring invite still needs to be created.
 
 ---
 
@@ -127,16 +142,3 @@
 - [[Team Profiles/Samuel Ribeiro]] → Commitments (3 outstanding — email action plans to group; share Call Evaluation Guide/rubric with Jared; confirm team leads have OTA access for Health Coach course)
 
 *Want Paul to remind you about overdue items? Ask: "What am I behind on?"*
-
----
-
-## 🟡 Added Tue 10/13 — Div 2 / 3 / 4 / 6 Cohort Update
-
-- [ ] **Div 4** — Get EVP approval for lock approval (phytolock) — **blocked**; Andy (VP) has no data to back the "why"; highest-leverage open item.
-- [ ] **Andy (VP)** — Provide info/workable justification for the phytolock need.
-- [ ] **Kyler (marketing)** — Identify the process submitted ~2 months ago that's still not done; clarify ownership (his joke = true signal).
-- [ ] **Robert (Div 2 VP)** — Push "getting ads up" pattern to live; roll out hypothesis; send SOPS to Div 4.
-- [ ] **Rykker (Div 6)** — Ship VIP boxes in 1–2 weeks; set up next steps with Div 3 (next Monday).
-- [ ] **Div 2 / Div 6** — Provide retention/conversion updates to Div 3 (next Monday).
-- [ ] **Div 3** — Evaluate larger budget request at the 90-day mark (170 opt-ins, expect ~doubled).
-
