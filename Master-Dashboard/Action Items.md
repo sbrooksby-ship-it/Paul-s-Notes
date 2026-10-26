@@ -16,12 +16,12 @@
 
 *Active tasks with deadlines this week.*
 
-- [ ] **Follow up with team members on cohort reports — Sherry's cohort (Division 3)** — Seven is responsible for following up with team members' reports. Must ensure metrics have correlation AND causation, not just correlation.
+- [x] **Follow up with team members on cohort reports — Sherry's cohort (Division 3)** — Seven is responsible for following up with team members' reports. Must ensure metrics have correlation AND causation, not just correlation.
 
-- [ ] **add jev to grade AI for sales call**
+- [x] **add jev to grade AI for sales call**
 
-- [ ] **Hear back from Sherry — she'll follow up with me** — Sherry said she'll follow up with Seven on cohort metrics. Track this.
-- [ ] **Adjust compliance AI tool to see if agents are leading them** — Review whether the compliance AI tool is properly guiding agents, or if agents are leading/redirecting the AI's responses.
+- [x] **Hear back from Sherry — she'll follow up with me** — Sherry said she'll follow up with Seven on cohort metrics. Track this.
+- [x] **Adjust compliance AI tool to see if agents are leading them** — Review whether the compliance AI tool is properly guiding agents, or if agents are leading/redirecting the AI's responses.
 
 - [ ] **Build checklist examiner bot** — A bot that examines checklists when agents add them, summarizes the outs (what was missed/disapproved), and emails the summary to whoever needs it (Rafa, Jared, Aaron — whoever I need to send it to). Self-managed — I handle all Streamlit + automation work alone.
 
@@ -34,14 +34,14 @@
 ## 🟢 Upcoming (Next Week+)
 
 *- [ ] **Michael side project — checklist automation** — Michael gathers "true sources" for checklist items; AI (JEV/Solar) marks pass/fail. Won't count toward his call eval stats. 2-hr Friday block (10/16, 2-4 PM). Needs: criteria doc, intake process.
-  - [ ] File the "side projects don't count toward stats" agreement in Michael's profile.
-  - [ ] Set up intake process for Michael (vault folder vs. shared doc).
-  - [ ] Finalize "What Makes a Source 'True'" criteria doc.
-  - [ ] Schedule weekly 2-hr block for Michael on Friday.
+  - [x] File the "side projects don't count toward stats" agreement in Michael's profile.
+  - [x] Set up intake process for Michael (vault folder vs. shared doc).
+  - [x] Finalize "What Makes a Source 'True'" criteria doc.
+  - [x] Schedule weekly 2-hr block for Michael on Friday.
 
 *- [ ] **JEV AI — parameters & alerts (due Friday 10/30)** — Set up JEV parameters for auditors to remove/flag data from the front end. Create easier visibility for JEV flags. Set up alert for "no customer interaction." Ensure the alert accounts for flagged data removal.
-  - [ ] Auditor data removal parameters for JEV
-  - [ ] Simpler JEV flags visibility
+  - [x] Auditor data removal parameters for JEV
+  - [x] Simpler JEV flags visibility
   - [ ] Alert for "no customer interaction"
 
 *- [ ] **A.I.M Executive Report — quarterly report** — First draft due first week of January. File a quarterly A.I.M report with:
