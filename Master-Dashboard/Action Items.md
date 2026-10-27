@@ -121,3 +121,5 @@
 
 **Oct 5 (Mon):**
 - [x] **Dept 13 Weekly Sync** — Aaron, Sophia, Seven (Michael out — medical procedure; Brad off all week). Key outcomes: (1) **Seven's call-eval sharing proposal APPROVED — team leads can now share call evals with their team members.** (2) Sales calls pilot the automation this week, Care likely next week. (3) Aaron updated inactive checklists to the new pillar format — **Brad approved Friday.** Issue authorities sent to Lindsay; Taylor, Albert, Jen, Alicia, Rafa pending. (4) Aaron now emails checklists for feedback instead of scheduling meetings — meetings are review/approval only. (5) This week's checklist focus: 16A (Data & Intelligence), starting with director Sam. (6) Agent guide submitted, awaiting Dept 14 sign-off. [Daily 10/5]
+
+*- [ ] **JEV AI — Talk time vs. words analysis** — Add talk-time and word-count analysis to JEV. Report WPM, pause ratio, and engagement flags. Cross-reference low-quality JEV flags with engagement metrics. [MyVault: Jev AI Automation/Analysis - Talk Time vs Words in Calls.md]*
