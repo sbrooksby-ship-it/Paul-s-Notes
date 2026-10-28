@@ -9,78 +9,54 @@
 
 ## Purpose
 
-Review measurement gaps in cohort/program tracking and propose improvements for the analytics team to address.
+Review measurement gaps in cohort projects and propose improvements for the analytics team to address.
 
 ---
 
-## 1. VIP Cohort Simulation — Control Group Missing (Critical)
+## 1. Cohort Projects — What's Being Tracked
 
-| Issue | Impact | Recommended Fix |
-|---|---|---|
-| **No control group** | Can't prove VIP box caused retention — only that it's consistent with it | Recruit a matched control group of similar-tenure subscribers receiving standard treatment |
-| **Self-selected cohort** | Customers already among the most loyal — selection bias | Random or representative sample |
-| **No baseline data** | All numbers are assumptions, not observed data | Compare to general subscriber base |
-
-**Key reference (MyVault):** *"Ten loyal customers who were already the most loyal segment will do well. That tells us nothing about whether the attention caused it."*
-
-**Source files:**
-- `VIP Cohort Simulation - Comparison.md` (Group B vs. C results) — MyVault
-- `VIP Cohort Simulation - No Control Group.md` (structural issues) — MyVault
+| Project | Owner | Division | Status | What's Measured |
+|---|---|---|---|---|
+| **3-Month Bundle Subscription** | Sherry | Div 3 | Active — planning/early | Purchase options, upfront revenue, AOV, retention, fulfillment |
+| **Backup Payment Method Prompt** | Sherry | Div 3 | Active — anticipating end (due Sep 30) | High-decline customers (2+ declines in first 6 months) |
+| **VIP Appreciation Box** | Rykker | Div 6 | Active — pilot | Loyalty, engagement, advocacy |
+| **Featured Success Story Recognition** | Rykker | Div 6 | Active — pilot | Personal recognition, appreciation, loyalty |
 
 ---
 
 ## 2. Cohort Metrics — Correlation vs. Causation Required
 
-**Source (Team-Brain — Weekly-Pulse-Check):** Sherry (Director, Division 3) owns cohort metrics. The requirement is that metrics must show **correlation AND causation**, not just correlation.
+**Source (Team-Brain):** Sherry (Director, Division 3) owns cohort metrics. The requirement is that metrics must show **correlation AND causation**, not just correlation.
 
-**Gap:** The VIP cohort simulation is the only cohort metrics example in the vault. It lacks a control group, so causation cannot be proven (MyVault). Team-Brain shows the ongoing expectation that Sherry's Division 3 cohort metrics must establish causation.
+**Gap:** The only cohort metrics requirement in the vault is for Sherry's Division 3 cohort. Rykker's Div 6 cohort projects (VIP box, success story recognition) have no stated measurement targets or pass/fail criteria.
 
-**Fix:** The VIP cohort simulation should be restructured with a matched control group so the causation requirement (per the Team-Brain action item) can actually be met.
-
----
-
-## 3. Call Evaluation — Talk Time vs. Words Not Measured
-
-| Issue | Impact | Recommended Fix |
-|---|---|---|
-| **No talk-time vs. word-count tracking** | Can't distinguish script-reading from genuine engagement | Add WPM + pause ratio to JEV data |
-| **No scheduled vs. completed tracking** | No visibility on no-shows or call completion rates | Track scheduled vs. completed |
-| **No time-of-day patterns** | Can't optimize call scheduling | Add temporal analysis |
-
-**Source:** MyVault `Jev AI Automation/Analysis - Talk Time vs Words in Calls.md` (cross-referenced with Team-Brain's call eval pipeline)
+**Fix:** The Div 6 cohort projects need measurement targets defined — what proves the VIP box or success-story recognition actually improves retention/engagement?
 
 ---
 
-## 4. Audit & Checklists — No Completion Metrics
+## 3. Measurement Gaps
 
-| Issue | Impact | Recommended Fix |
-|---|---|---|
-| **No completion rates** | Can't see which checklists are hardest or who's falling behind | Track completion by agent/checklist |
-| **No feedback loop** | No data on whether checklists prevent errors | Add "usefulness" ratings |
-
----
-
-## 5. Broader Measurement Gaps
-
-| Area | Missing Data |
-|---|---|
-| **Automation/Bots** | No bot performance metrics (accuracy, usage, errors) |
-| **Database & Infrastructure** | No tracking of data freshness or sync failures |
-| **Streamlit Apps** | No user adoption metrics |
+| Gap | Where | Impact | Recommended Fix |
+|---|---|---|---|
+| **No control group** | VIP Cohort Simulation | Can't prove VIP box caused retention — only that it's consistent with it | Recruit a matched control group of similar-tenure subscribers receiving standard treatment |
+| **Div 6 cohorts unmeasured** | Rykker's VIP box + success story projects | No way to prove personal recognition or VIP box improves retention/engagement | Define measurement targets + pass/fail criteria |
+| **Div 3 cohort due date passed** | Backup Payment Method (due Sep 30) | Status unclear — is it still in progress? | Confirm with Sherry whether still in progress or wrapping up |
+| **Div 3 gated on downstream data** | Cohort update 10/13 | Waiting on Div 2 and Div 6 for retention/conversion updates | Align on reporting schedule for Div 2, 6 updates |
+| **Cohort-level total not tracked** | 10/13 cohort sync | 170 total opt-ins with expectation to double | Track cohort-level metrics across all divisions |
 
 ---
 
-## What's Already Good (Cohort-Specific)
+## 4. What's Already Good
 
 | Area | Strong |
 |---|---|
-| **VIP Simulation (comparison)** | Quantitative ROI, referral counts, retention %, retention delta — MyVault |
+| **VIP Cohort Simulation (comparison)** | Quantitative ROI, referral counts, retention %, retention delta — MyVault |
 
 ---
 
 ## Recommended Next Steps
 
-1. **Control group** — Design a matched control cohort for the VIP micro-pilot (needs 2–3 weeks to run)
-2. **Call analytics** — Add talk-time + word-count fields to the JEV data schema
-3. **Checklist tracking** — Add completion rate metrics to the Checklist Reporting app
-4. **Admin/Synced data** — Review whether there are any sync issues or data quality problems
+1. **Define measurement targets** for Rykker's Div 6 cohort projects (VIP box + success story recognition)
+2. **Confirm Div 3 backup payment** status with Sherry (due Sep 30 — still in progress?)
+3. **Define pass/fail criteria** for both Div 6 cohort projects
+4. **Establish a cohort measurement framework** — does the team want correlation AND causation as a standard requirement, or are there exceptions?
