@@ -38,7 +38,7 @@ Review measurement gaps in cohort projects and propose improvements for the anal
 
 **Key finding:** 360 opt-ins but only **3 successful transactions** (0.83% conversion). Adoption ≠ usage.
 
-**What's missing:** No measure of retry success, recovered revenue, or future declines. Recharge has no performance metric available, so monthly email updates (Maggie) are the only monitoring.
+**What's missing:** No measure of retry success (did those 3 transactions actually recover revenue where the primary payment failed?), converted rate (3/360 = 0.83%), or future decline reduction. The raw count of successful transactions (3) IS tracked, but the rate and revenue impact are not.
 
 **Measurement gap:** Opt-in rate is tracked, but successful transaction rate is not. Without this, the report can't determine if the tool impacts retry success or recovered revenue.
 
