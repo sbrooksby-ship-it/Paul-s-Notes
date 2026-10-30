@@ -59,7 +59,7 @@
 
 *- [x] **Next Sophia check-in** — ~October 6, 2026 (Tuesday of next week). Recurring invite still needs to be created. (Moved to quarterly — next invite due December 2026.)
 
-*- [x] **Growth Path — Dashboard for Dept 14 & 15** — Build a growth path dashboard for Departments 14 & 15. Features: admin panel, attendance tracker, training path + tips, Google Auth login, certifications/help requests, Moodle integration, MCP server OTA results, simple dashboard view, training event ads. [Projects/Growth Path/Growth Path - Dashboard and Learning Platform.md]*
+*- [ ] **Growth Path — Dashboard for Dept 14 & 15** — Build a growth path dashboard for Departments 14 & 15. Features: admin panel, attendance tracker, training path + tips, Google Auth login, certifications/help requests, Moodle integration, MCP server OTA results, simple dashboard view, training event ads, Google Gemini integration, Div 5 email login. [Projects/Growth Path/Growth Path - Dashboard and Learning Platform.md]*
 
 ---
 
