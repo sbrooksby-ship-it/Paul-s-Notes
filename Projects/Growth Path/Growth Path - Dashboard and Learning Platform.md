@@ -59,6 +59,15 @@ Build a single dashboard for Department 14 and Department 15 to track:
   - Attendance at the last events
   - Next training events (with ads)
 
+### 8. Google Gemini Integration
+- Google Gemini will be incorporated into the dashboard for smart Q&A, help ticket triage, and training recommendations.
+- The dashboard will connect to Google Gemini for natural language interactions and intelligent help routing.
+
+### 9. Authentication
+- Users will log in with their **Div 5 email** (Google Workspace).
+- **Google Auth (OAuth)** will be used for single sign-on.
+- Authentication will be set up using the Div 5 email domain.
+
 ---
 
 ## Key Decisions
@@ -67,7 +76,8 @@ Build a single dashboard for Department 14 and Department 15 to track:
 |---|---|
 | **Moodle** | Connect via API for course completion data |
 | **MCP server** | Pull OTA results via MCP endpoints |
-| **Auth** | Google OAuth for user login |
+| **Google Gemini** | Incorporated for smart Q&A, help triage, and training recommendations |
+| **Auth** | Google OAuth — users log in with Div 5 email |
 | **Dashboard** | Simple, one-page view per user |
 | **Department 15** | Requests certifications + help through the dashboard |
 
